@@ -166,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        Debug.Log(isGrounded);
+        Debug.Log(cam.fieldOfView);
     }
 
         void MyInput()
@@ -406,6 +406,7 @@ public class PlayerMovement : MonoBehaviour
             case MovementState.air:
                 camAnimator.SetBool("isWalk", false);
                 camAnimator.SetBool("isSprint", false);
+                if (moveSpeed == sprintSpeed) cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintfov + 5f, 5f * Time.deltaTime);
                 break;
         }
     }

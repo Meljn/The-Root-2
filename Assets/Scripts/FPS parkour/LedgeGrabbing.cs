@@ -5,6 +5,9 @@ using UnityEngine;
 public class LedgeGrabbing : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private Camera camera;
+
+
     public PlayerMovement pm;
     public WallRun wl;
     public Transform orientation;
@@ -23,6 +26,7 @@ public class LedgeGrabbing : MonoBehaviour
 
     [Header("Ledge Jumping")]
     public KeyCode jumpKey = KeyCode.Space;
+    public float jumpFov = 130f;
     public float ledgeJumpForwardForce;
     public float ledgeJumpUpwardForce;
 
@@ -40,6 +44,8 @@ public class LedgeGrabbing : MonoBehaviour
     public bool exitingLedge;
     public float exitLedgeTime;
     private float exitLedgeTimer;
+
+    public bool ledgeDetected;
 
     private void Update()
     {
@@ -71,7 +77,7 @@ public class LedgeGrabbing : MonoBehaviour
 
     private void LedgeDetection()
     {
-        bool ledgeDetected = Physics.SphereCast(transform.position, ledgeSphereCastRadius, cam.forward, out ledgeHit, ledgeDetectionLength, whatIsLedge);
+        ledgeDetected = Physics.SphereCast(transform.position, ledgeSphereCastRadius, cam.forward, out ledgeHit, ledgeDetectionLength, whatIsLedge);
 
         if (!ledgeDetected) return;
 
@@ -166,4 +172,5 @@ public class LedgeGrabbing : MonoBehaviour
     {
         lastLedge = null;
     }
+
 }

@@ -6,7 +6,9 @@ public class PauseMenu : MonoBehaviour
 {
     public bool PauseGame;
     public GameObject pauseGameMenu;
+    public GameObject ledgeDetected;
     public PlayerLook playerLookScript;
+    public LedgeGrabbing grabbingScript;
 
     private void Update()
     {
@@ -22,6 +24,13 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+
+        if (grabbingScript.ledgeDetected || grabbingScript.holding)
+        {
+            ledgeDetected.SetActive(true);
+        }
+
+        else ledgeDetected.SetActive(false);
     }
 
     public void Resume()
